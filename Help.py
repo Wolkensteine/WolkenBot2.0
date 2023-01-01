@@ -22,7 +22,7 @@ async def help_command(ctx, argument):
             url="https://Github.com/Wolkensteine/WolkenBot2.0",
             timestamp=datetime.datetime.utcnow()
         )
-        embed.set_footer(text="Message send by WolkenBot 2.0 created by Wolkensteine",
+        embed.set_footer(text="Message by WolkenBot 2.0",
                          icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                                   "WolkensteineIcon.png")
     else:
@@ -49,7 +49,7 @@ async def help_command(ctx, argument):
             url="https://Github.com/Wolkensteine/WolkenBot2.0",
             timestamp=datetime.datetime.utcnow()
         )
-        embed.set_footer(text="Message send by WolkenBot 2.0 created by Wolkensteine",
+        embed.set_footer(text="Message by WolkenBot 2.0",
                          icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                                   "WolkensteineIcon.png")
 
