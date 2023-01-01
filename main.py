@@ -1,5 +1,6 @@
 # imports
 import discord
+import Help
 
 # Bot setup
 intents = discord.Intents.all()
@@ -19,7 +20,7 @@ async def hello(ctx, name: str = None):
 
 @bot.command()
 async def help(ctx, *, argument=None):
-    ctx.respond()
+    await Help.help_command(ctx, argument=None)
 
 
 # Run bot
