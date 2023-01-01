@@ -3,7 +3,6 @@ import datetime
 
 
 async def help_command(ctx, argument):
-
     embed = discord.Embed(
         title="WolkenBot - Help",
         colour=0xaaffaa,
@@ -14,4 +13,4 @@ async def help_command(ctx, argument):
                      icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                               "WolkensteineIcon.png")
 
-    await ctx.respond()
+    await ctx.respond(embed=embed)
