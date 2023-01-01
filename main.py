@@ -1,7 +1,8 @@
 # imports
 import discord
+from discord import application_command
 import Help
-import admin
+import admin as ad
 import datetime
 
 # Bot setup
@@ -15,18 +16,18 @@ discord_secret = content[0]
 
 
 # commands
-@bot.slash_command()
-async def help(ctx, *, argument=None):
-    await Help.help_command(ctx, argument)
+@bot.slash_command(name="help", description="This command will give you help. You can define a specific theme that you need help for.")
+async def help(ctx, *, subject=None):
+    await Help.help_command(ctx, subject)
 
 
-@bot.slash_command()
+@bot.slash_command(name="hello", description="This command will make the bot greet someone. You can provide a name to be greeted.")
 async def hello(ctx, name: str = None):
     name = name or ctx.author.name
     await ctx.respond(f"Hello {name}!")
 
 
-@bot.slash_command()
+@bot.slash_command(name="info", description="This command will provide you with information about the bot.")
 async def info(ctx):
     embed = discord.Embed(
         title="Info",
@@ -42,6 +43,30 @@ async def info(ctx):
                      icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                               "WolkensteineIcon.png")
     await ctx.respond(embed=embed)
+
+
+admin = discord.SlashCommandGroup("admin", "Admin related commands")
+
+
+@admin.command(name="role_rights", description="Change the rights of a specified role")
+async def role_rights(ctx, role, rights):
+    if await ad.admin_right_check(ctx):
+        ad.change_access(rights, role, ctx.guild.name)
+
+
+@admin.command(name="command_rights", description="Change the needed rights for a command")
+async def command_rights(ctx, command, rights):
+    if await ad.admin_right_check(ctx):
+        ad.change_command_rights(rights, command, server=ctx.guild.name)
+
+
+@admin.command(name="add_admin_role", description="Add a role as admin role")
+async def add_admin_role(ctx, role):
+    if await ad.admin_right_check(ctx):
+        ad.add_role_as_admin(ctx, role)
+
+
+bot.add_application_command(admin)
 
 
 # events
@@ -61,10 +86,10 @@ async def on_message(message):
             or message.content.lower().replace("!", "").replace("?", "").replace(".", "") == "hello wolkenbot" \
             or message.content.lower().replace("!", "").replace("?", "").replace(".", "") == "moin wolkenbot" \
             or message.content.lower().replace("!", "").replace("?", "").replace(".", "") == "moin bot":
-        await message.channel.send("Hello " + str(message.author))
+        await message.channel.send("Hello " + str(message.author).split("#")[0])
         await message.add_reaction("👋")
 
 
 # Run bot
-admin.load_settings()
+ad.load_settings()
 bot.run(discord_secret)

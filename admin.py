@@ -320,91 +320,11 @@ def change_command_rights(right, command, server):
     save(server)
 
 
-def add_role_as_admin(message):
-    MyClient.admin_roles[get_server_number(message.guild.name)] += " " + message.content.lower().replace("!admin."
-                                                                                                              "rights "
-                                                                                                              "admin ",
-                                                                                                              "")
+def add_role_as_admin(message, role):
+    MyClient.admin_roles[get_server_number(message.guild.name)] += " " + role
 
 
-async def admin_rights_command(message, content):
-    # Admins can configure rights with this command
-    if content.startswith("role"):
-        info = content.replace("role ", "").split(" ")
-        if len(info) < 2:
-            embed = discord.Embed(
-                title="Sorry. I don't remember if this command could run without at least 2 arguments.",
-                description="You should try this: !admin.rights role <right> <role> * n",
-                colour=0xff0000,
-                url="https://Github.com/Wolkensteine/WolkenBot",
-                timestamp=datetime.datetime.utcnow()
-            )
-            embed.set_footer(text="Message by WolkenBot 2.0",
-                             icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
-                                      "WolkensteineIcon.png")
-
-            await message.channel.send(embed=embed)
-        else:
-            right = info[0]
-            roles = info[1]
-            for i in range(len(info) - 2):
-                roles += " " + info[i + 2]
-
-            if right == "accessall" or right == "mediumaccess" or right == "noaccess":
-                change_access(right, roles, message.guild.name)
-            else:
-                embed = discord.Embed(
-                    title="Sorry. I don't remember that as a right.",
-                    description="You should try this: !admin.rights role <right> <role> * n\n"
-                                "There are the following rights:\n"
-                                "accessall.json => grant access to all commands for a role\n"
-                                "mediumaccess => grant access to most commands for a role\n"
-                                "noaccess => deny access to all commands for a role\n",
-                    colour=0xff0000,
-                    url="https://Github.com/Wolkensteine/WolkenBot",
-                    timestamp=datetime.datetime.utcnow()
-                )
-                embed.set_footer(text="Message by WolkenBot 2.0",
-                                 icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
-                                          "WolkensteineIcon.png")
-
-                await message.channel.send(embed=embed)
-
-    elif content.startswith("command"):
-        info = content.replace("command ", "").split(" ")
-        if len(info) != 2:
-            embed = discord.Embed(
-                title="Sorry. I don't remember if this command could run without 2 arguments.",
-                description="You should try this: !admin.rights command <right> <command>",
-                colour=0xff0000,
-                url="https://Github.com/Wolkensteine/WolkenBot",
-                timestamp=datetime.datetime.utcnow()
-            )
-            embed.set_footer(text="Message by WolkenBot 2.0",
-                             icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
-                                      "WolkensteineIcon.png")
-
-            await message.channel.send(embed=embed)
-        else:
-            change_command_rights(info[0], info[1], server=message.guild.name)
-
-    elif content.startswith("admin"):
-        add_role_as_admin(message)
-        tmp = MyClient.admin_roles[get_server_number(message.guild.name)]
-        embed = discord.Embed(
-            title="A list of admin roles: ",
-            description=tmp,
-            colour=0xff8c1a,
-            url="https://Github.com/Wolkensteine/WolkenBot2.0",
-            timestamp=datetime.datetime.utcnow()
-        )
-        embed.set_footer(text="Message by WolkenBot 2.0",
-                         icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
-                                  "WolkensteineIcon.png")
-        await message.channel.send(embed=embed)
-
-
-async def admin_commands(message):
+async def admin_right_check(message):
     global tmp
     tmp = 0
 
@@ -415,10 +335,6 @@ async def admin_commands(message):
     for i in range(len(MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" "))):
         if MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" ")[i] in \
                 [y.name.lower() for y in message.author.roles]:
-            if message.content.lower().replace("!admin.", "").startswith("rights"):
-                await admin_rights_command(message, message.content.lower().replace("!admin.rights ", ""))
-            if message.content.lower().replace("!admin.", "").startswith("help"):
-                await admin_help(message)
             tmp = 1
             break
 
@@ -434,3 +350,6 @@ async def admin_commands(message):
                                   "WolkensteineIcon.png")
 
         await message.channel.send(embed=embed)
+        return False
+    else:
+        return True
