@@ -1,9 +1,9 @@
 # imports
+import datetime
 import discord
-from discord import application_command
 import Help
 import admin as ad
-import datetime
+import MathCommands
 
 # Bot setup
 intents = discord.Intents.all()
@@ -70,9 +70,9 @@ bot.add_application_command(admin)
 math = discord.SlashCommandGroup("math", "Math related commands")
 
 
-@math.command(name="", description="")
+@math.command(name="math_square", description="This will calculate: num1^num2")
 async def square(ctx, num1, num2):
-    print()
+    await MathCommands.math_square(ctx, num1, num2)
 
 
 bot.add_application_command(math)
