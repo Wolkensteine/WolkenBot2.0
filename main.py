@@ -67,6 +67,15 @@ async def add_admin_role(ctx, role):
 
 
 bot.add_application_command(admin)
+math = discord.SlashCommandGroup("math", "Math related commands")
+
+
+@math.command(name="", description="")
+async def square(ctx, num1, num2):
+    print()
+
+
+bot.add_application_command(math)
 
 
 # events
