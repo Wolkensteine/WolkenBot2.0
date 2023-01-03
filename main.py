@@ -75,6 +75,11 @@ async def square(ctx, num1, num2):
     await MathCommands.math_square(ctx, num1, num2)
 
 
+@math.command(name="math_root", description="This will calculate: take the num2th root of num1")
+async def square(ctx, num1, num2):
+    await MathCommands.math_square(ctx, num1, num2)
+
+
 bot.add_application_command(math)
 
 

@@ -25,6 +25,8 @@ async def help_command(ctx, argument):
         embed.set_footer(text="Message by WolkenBot 2.0",
                          icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                                   "WolkensteineIcon.png")
+    elif argument == "play":
+        print()
     else:
         embed = discord.Embed(
             title="WolkenBot - Help",
@@ -38,8 +40,7 @@ async def help_command(ctx, argument):
                         "the Message as an embed, which might corrupt files attached to the message!]\n"
                         "/math => Has some cool math functions implemented. Run '/help math' to see all the "
                         "commands of /math\n"
-                        "/gif + search term => Sends you a gif found with your search term\n"
-                        "/play. + term => plays a sound specified by the term. Get help with !play.help\n"
+                        "/play + term => plays a sound specified by the term. Get help with '/help play'\n"
                         "/g => Sends you a random Frog death message.\n"
                         "/rate + text => Lets you rate sth easily\n"
                         "/randomname => returns a random name\n"
