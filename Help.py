@@ -4,7 +4,17 @@ import datetime
 
 async def help_command(ctx, argument):
     if argument == "math":
-        print()
+        embed = discord.Embed(
+            title="Math.Help",
+            description="Use '.' instead of ',' in case you are not used to the english version\n!math.root"
+                        " n number => nth root of number\n!math.square number^number => number^number = ?",
+            colour=0xff8c1a,
+            url="https://Github.com/Wolkensteine/WolkenBot2.0",
+            timestamp=datetime.datetime.utcnow()
+        )
+        embed.set_footer(text="Message by WolkenBot 2.0",
+                         icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                  "WolkensteineIcon.png")
     elif argument == "admin":
         embed = discord.Embed(
             title="Some help for you my Admin friend!",
