@@ -36,7 +36,18 @@ async def help_command(ctx, argument):
                          icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                                   "WolkensteineIcon.png")
     elif argument == "play":
-        print()
+        embed = discord.Embed(
+            title="Some audio help for you:",
+            description="!play.name => Plays audio in your channel. Make sure you are connected to one!\n"
+                        "names:\n"
+                        "Frech",
+            colour=0xff8c1a,
+            url="https://Github.com/Wolkensteine/WolkenBot2.0",
+            timestamp=datetime.datetime.utcnow()
+        )
+        embed.set_footer(text="Message by WolkenBot 2.0",
+                         icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                  "WolkensteineIcon.png")
     else:
         embed = discord.Embed(
             title="WolkenBot - Help",
