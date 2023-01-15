@@ -5,9 +5,9 @@ import datetime
 async def help_command(ctx, argument):
     if argument == "math":
         embed = discord.Embed(
-            title="Math.Help",
-            description="Use '.' instead of ',' in case you are not used to the english version\n!math.root"
-                        " n number => nth root of number\n!math.square number^number => number^number = ?",
+            title="Help with /Math",
+            description="Use '.' instead of ',' in case you are not used to the english version\n/math root"
+                        " n number => nth root of number\n/math square number^number => number^number = ?",
             colour=0xff8c1a,
             url="https://Github.com/Wolkensteine/WolkenBot2.0",
             timestamp=datetime.datetime.utcnow()
@@ -38,7 +38,7 @@ async def help_command(ctx, argument):
     elif argument == "play":
         embed = discord.Embed(
             title="Some audio help for you:",
-            description="!play.name => Plays audio in your channel. Make sure you are connected to one!\n"
+            description="/play name => Plays audio in your channel. Make sure you are connected to one!\n"
                         "names:\n"
                         "Frech",
             colour=0xff8c1a,
