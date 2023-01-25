@@ -1,3 +1,6 @@
+# You are allowed to use the code in this project as long as you follow the licence, which you can find on the
+# corresponding GitHub page: https://github.com/Wolkensteine/WolkenBot2.0
+
 # imports
 import datetime
 import discord
