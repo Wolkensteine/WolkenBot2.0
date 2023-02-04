@@ -9,3 +9,6 @@
 This is the second etaration of my discord bot. The first etaration is found [here](https://github.com/Wolkensteine/WolkenBot)!<br>
 This is just the newest fully functional version of the bot.<br>
 Btw when you like the bot you might want to visit my discord, so feel free to join me and some friends! [invite link](https://discord.gg/vk9v2x4EjT)
+
+# Requirements
+You will need [pycord](https://pycord.dev/) instead of the normal discord.py library, else the bot will not work.
