@@ -93,6 +93,16 @@ async def on_ready():
 
 
 @bot.event
+async def on_member_update(before, after):
+    member = bot.get_guild(before.guild.id).get_member(before.id)
+    if member == bot.user:
+        if before.nick != after.nick and after.nick is not None:
+            print("My nick was changed. I'll change it back.")
+            for guild in bot.guilds:
+                await guild.me.edit(nick="")
+
+
+@bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
