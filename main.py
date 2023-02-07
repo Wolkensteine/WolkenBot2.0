@@ -54,19 +54,19 @@ admin = discord.SlashCommandGroup("admin", "Admin related commands")
 @admin.command(name="role_rights", description="Change the rights of a specified role")
 async def role_rights(ctx, role, rights):
     if await ad.admin_right_check(ctx):
-        ad.change_access(rights, role, ctx.guild.name)
+        await ad.change_access(rights, role, ctx.guild.name)
 
 
 @admin.command(name="command_rights", description="Change the needed rights for a command")
 async def command_rights(ctx, command, rights):
     if await ad.admin_right_check(ctx):
-        ad.change_command_rights(rights, command, server=ctx.guild.name)
+        await ad.change_command_rights(rights, command, server=ctx.guild.name)
 
 
 @admin.command(name="add_admin_role", description="Add a role as admin role")
 async def add_admin_role(ctx, role):
     if await ad.admin_right_check(ctx):
-        ad.add_role_as_admin(ctx, role)
+        await ad.add_role_as_admin(ctx, role)
 
 
 bot.add_application_command(admin)
