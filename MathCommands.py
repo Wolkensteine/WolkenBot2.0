@@ -3,8 +3,8 @@ import datetime
 
 
 async def math_root(message, num1, num2):
-    temp_text = "The " + num1 + ". root of " + num2 + " is: " + \
-                str(float(num1) ** 1 / float(num2))
+    temp_text = "The " + str(float(num1)) + ". root of " + str(float(num2)) + " is: " + \
+                str(float(num2) ** 1 / float(num1))
     embed = discord.Embed(
         title="Math.Root",
         description=temp_text,
@@ -15,7 +15,7 @@ async def math_root(message, num1, num2):
     embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
                      icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                               "WolkensteineIcon.png")
-    await message.channel.send(embed=embed)
+    await message.respond(embed=embed)
 
 
 async def math_square(message, num1, num2):
@@ -30,4 +30,4 @@ async def math_square(message, num1, num2):
     embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
                      icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                               "WolkensteineIcon.png")
-    await message.channel.send(embed=embed)
+    await message.respond(embed=embed)

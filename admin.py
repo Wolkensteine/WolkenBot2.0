@@ -175,10 +175,14 @@ def load_server(server_name):
 def load_settings():
     file_list = os.listdir(path=r"./Admin/")
     for i in range(len(file_list)):
-        tmp = file_list[i].replace("_accessall.txt", "").replace("_mediumaccess.txt", "").replace("_noaccess.txt", "").\
-            replace("_command_access.txt", "").replace("_admin_roles.txt", "").replace("_announcement_channels.txt", "")
-        if type(get_server_number(tmp)) != int:
-            load_server(tmp)
+        if file_list[i].replace(".gitignore", "") == "":
+            print("ignoring gitignore")
+        else:
+            tmp = file_list[i].replace("_accessall.txt", "").replace("_mediumaccess.txt", "").replace("_noaccess.txt", "").\
+                replace("_command_access.txt", "").replace("_admin_roles.txt", "").\
+                replace("_announcement_channels.txt", "")
+            if type(get_server_number(tmp)) != int:
+                load_server(tmp)
 
 
 def add_server(server_name):
@@ -209,6 +213,8 @@ def add_server(server_name):
     MyClient.mute_commands.append(0)
     MyClient.fish_master_command.append(1)
     MyClient.do_not_annoy_command.append(0)
+
+    MyClient.announcement_channels.append("")
 
     file = open("./Admin/" + server_name + "_accessall.txt", 'w')
     file.close()
@@ -263,7 +269,7 @@ def save(server):
         file.write(MyClient.announcement_channels[server_num])
 
 
-def change_access(access, roles, server):
+async def change_access(access, roles, server):
     if type(get_server_number(server)) != int:
         add_server(server)
     server_num = get_server_number(server)
@@ -276,7 +282,7 @@ def change_access(access, roles, server):
     save(server)
 
 
-def change_command_rights(right, command, server):
+async def change_command_rights(right, command, server):
     if not get_server_number(server):
         add_server(server)
     server_num = get_server_number(server)
@@ -320,8 +326,10 @@ def change_command_rights(right, command, server):
     save(server)
 
 
-def add_role_as_admin(message, role):
+async def add_role_as_admin(message, role):
     MyClient.admin_roles[get_server_number(message.guild.name)] += " " + role
+    save(message.guild.name)
+    await message.respond("Changed " + role + " to an admin role.")
 
 
 async def admin_right_check(message):
