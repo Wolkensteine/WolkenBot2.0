@@ -4,9 +4,11 @@
 # imports
 import datetime
 import discord
+from discord.utils import get
 import Help
 import admin as ad
 import MathCommands
+import discordApi
 
 # Bot setup
 intents = discord.Intents.all()
@@ -16,6 +18,7 @@ bot = discord.Bot(intents=intents, help_command=None)
 f = open("./Config/keys.txt")
 content = f.read().splitlines()
 discord_secret = content[0]
+UserToken = content[1]
 
 
 # commands
@@ -90,6 +93,7 @@ bot.add_application_command(math)
 @bot.event
 async def on_ready():
     print("Beep bop! WolkenBot 2.0 is ready!")
+    print(f'Logged in as "{bot.user}"')
 
 
 @bot.event
@@ -116,7 +120,22 @@ async def on_message(message):
         await message.channel.send("Hello " + str(message.author).split("#")[0])
         await message.add_reaction("👋")
 
+    if "wolki" in message.content.lower():
+        user = await bot.fetch_user(698195476180107435)
+        await message.channel.send(user.mention)
+
+    if "wolkensteine" in message.content.lower():
+        user = await bot.fetch_user(698195476180107435)
+        await message.channel.send(user.mention)
+
+    if "sus" in message.content.lower():
+        if str(message.author) != "Wolki#8406":
+            emoji = get(message.guild.emojis, name="amogus")
+            await message.add_reaction(emoji)
+            Wolki.send_message("What is sus?", message.channel.id)
+
 
 # Run bot
+Wolki = discordApi.DiscordApi(token=UserToken)
 ad.load_settings()
 bot.run(discord_secret)
