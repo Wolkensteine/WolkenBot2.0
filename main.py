@@ -8,7 +8,6 @@ from discord.utils import get
 import Help
 import admin as ad
 import MathCommands
-import discordApi
 
 # Bot setup
 intents = discord.Intents.all()
@@ -132,10 +131,8 @@ async def on_message(message):
         if str(message.author) != "Wolki#8406":
             emoji = get(message.guild.emojis, name="amogus")
             await message.add_reaction(emoji)
-            Wolki.send_message("What is sus?", message.channel.id)
 
 
 # Run bot
-Wolki = discordApi.DiscordApi(token=UserToken)
 ad.load_settings()
 bot.run(discord_secret)
