@@ -136,13 +136,14 @@ async def on_message(message):
         await message.channel.send('Calculating...')
 
         counter = 0
-        messages = await message.channel.history(limit=9999999).flatten()
+        messages = await message.channel.history(limit=500).flatten()
 
         for msg in messages:
             if msg.author == message.author:
                 counter += 1
 
-        await message.channel.send(f'{message.author} has {str(counter)} messages in {message.channel}.')
+        await message.channel.send(f'{message.author} has {str(counter)} messages in {message.channel}. '
+                                   f'[last 500 messages]')
 
 
 # Run bot
