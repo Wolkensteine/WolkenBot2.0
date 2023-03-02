@@ -132,6 +132,18 @@ async def on_message(message):
             emoji = get(message.guild.emojis, name="amogus")
             await message.add_reaction(emoji)
 
+    if message.content.startswith('!stat'):
+        await message.channel.send('Calculating...')
+
+        counter = 0
+        messages = await message.channel.history(limit=9999999).flatten()
+
+        for msg in messages:
+            if msg.author == message.author:
+                counter += 1
+
+        await message.channel.send(f'{message.author} has {str(counter)} messages in {message.channel}.')
+
 
 # Run bot
 ad.load_settings()
