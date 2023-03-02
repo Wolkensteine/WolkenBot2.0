@@ -45,7 +45,7 @@ async def permission_denied(message):
     embed = discord.Embed(
         title="Access denied!",
         colour=0xff0000,
-        url="https://Github.com/Wolkensteine/WolkenBot",
+        url="https://Github.com/Wolkensteine/WolkenBot2.0",
         timestamp=datetime.datetime.utcnow()
     )
     embed.set_footer(text="Message by WolkenBot 2.0",
@@ -350,7 +350,7 @@ async def admin_right_check(message):
         embed = discord.Embed(
             title="Access denied!",
             colour=0xff0000,
-            url="https://Github.com/Wolkensteine/WolkenBot",
+            url="https://Github.com/Wolkensteine/WolkenBot2.0",
             timestamp=datetime.datetime.utcnow()
         )
         embed.set_footer(text="Message by WolkenBot 2.0",
